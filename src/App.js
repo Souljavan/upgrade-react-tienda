@@ -1,6 +1,9 @@
 import './App.scss';
 import React,{useEffect,useState} from 'react'
 import MyNavbar from './components/MyNavbar';
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import { Container } from 'react-bootstrap';
 
 function App() {
 
@@ -30,13 +33,13 @@ useEffect(() => {
 
 
   return (
-    <div className="page-content">
-    <div className="container">
+  <Container fluid>
     <MyNavbar categorias={categoria}/>
-     Hola Mundo
+     <Routes>
+     <Route exact path='/' element={<Home />} />
+     </Routes>
+     </Container>
     
-    </div>
-    </div>
   );
 }
 
