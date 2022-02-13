@@ -1,9 +1,10 @@
 import './App.scss';
 import React,{useEffect,useState} from 'react'
-import MyNavbar from './components/MyNavbar';
+import MyNavbar from './components/MyNavBar/MyNavbar';
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import { Container } from 'react-bootstrap';
+import Categorias from './components/Categorias/Categorias';
 
 function App() {
 
@@ -22,6 +23,7 @@ useEffect(() => {
       (response) => {
         setIsLoaded(true);
         setCategoria(response);
+        // console.log(response)
       },
       (error) => {
         setIsLoaded(true);
@@ -33,10 +35,20 @@ useEffect(() => {
 
 
   return (
-  <Container fluid>
+  <Container fluid="md">
     <MyNavbar categorias={categoria}/>
      <Routes>
      <Route exact path='/' element={<Home />} />
+
+     {categoria?.map((item,index)=>{
+       var nombre=item.nombre.replace(' ','_')
+       return(
+        <Route exact path={'/'+nombre} element={<Categorias tipo={nombre} />} key={index} />
+       
+            )
+          })}
+
+     <Route exact path='/categorias' element={<Categorias />} />
      </Routes>
      </Container>
     

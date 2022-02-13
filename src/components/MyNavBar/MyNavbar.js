@@ -8,14 +8,15 @@ const MyNavbar = (props) => {
   return (
   <Navbar bg="light" expand="lg">
   <Container>
-    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <Navbar.Brand href="#home"><img src='logo_transparent_horizontal2.png' alt='logo'></img></Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
         <Nav.Link href="/">Home</Nav.Link>
         {props.categorias?.map((item,index)=>{
+          var nombre=item.nombre.replace(' ','_')
        return(
-              <Nav.Link href={'/'+item.nombre} key={index}>{item.nombre}</Nav.Link>
+              <Nav.Link href={'/'+nombre} key={index}>{item.nombre}</Nav.Link>
             )
           })}
       </Nav>

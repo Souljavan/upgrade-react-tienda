@@ -1,27 +1,52 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { Row,Col,Card, Button } from 'react-bootstrap';
+import "./Carrousel.scss"
 
-const Carrousel = () => {
+const Carrousel = (props) => {
+
+const BASEURL = "http://localhost:3001/productos/";
+const [productos, setproductos] = useState(null);
+const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    fetch(BASEURL + props.categoria)
+      .then(res => res.json())
+      .then(
+        (response) => {
+          setproductos(response);
+          // console.log(response)
+          setIsLoaded(true)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  },[isLoaded]);
+  
   return (
       <>
-      <Row><Col> <h2>Productos Mas vendidos</h2></Col></Row>
+      <Row className='mt-2 mb-2'><Col> <h2>{props.titulo}</h2></Col></Row>
     <Row>
        
-    <Col>
-    <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
+
+    {productos?.map((item,index)=>{
+       return(
+        <Col key={index}>
+          <Card>
+            <Card.Img variant="top" src={item.imagen} />
+          <Card.Body>
+            <Card.Title>{item.nombre}</Card.Title>
+              <Card.Text>
+                {item.precio}
+              </Card.Text>
+            <Button variant="primary">Ver Producto</Button>
+          </Card.Body>
+        </Card>
     </Col>
-    <Col>2 of 3</Col>
-    <Col>3 of 3</Col>
+            )
+          })}
+
+
   </Row>
   </>
   )
