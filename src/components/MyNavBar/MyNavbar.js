@@ -1,9 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Navbar,Container,Nav, Button} from 'react-bootstrap';
-import { Person } from 'react-bootstrap-icons';
+import { Person,PersonCheck } from 'react-bootstrap-icons';
 import "./MyNavbar.scss"
 
 const MyNavbar = (props) => {
+
+//Compruebo si esta logueado o no.
+var tokendate=localStorage.getItem('tokendate');
+var tokenconv=new Date(tokendate)
+var today = new Date();
+today.setHours(today.getHours() + 4);
+const [Login, SetLogin] = useState(false);
+
+debugger
+if ((tokendate!=null)&&(tokenconv<=today)){
+  console.log(Login)
+  console.log("aqui estoy")
+  SetLogin(true)
+}
+
 
 
   return (
@@ -21,7 +36,8 @@ const MyNavbar = (props) => {
             )
           })}
       </Nav>
-      <a href="/login"><Person size={30}/></a>
+      {Login? <a href="/login"><PersonCheck size={30}/></a> : <a href="/login"><Person size={30}/></a>}
+      {/* <a href="/login"><Person size={30}/></a> */}
       
     </Navbar.Collapse>
   </Container>
