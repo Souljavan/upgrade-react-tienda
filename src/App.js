@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import { Container } from 'react-bootstrap';
 import Categorias from './components/Categorias/Categorias';
+import Login from './components/Login/Login';
 
 function App() {
 
@@ -39,6 +40,7 @@ useEffect(() => {
     <MyNavbar categorias={categoria}/>
      <Routes>
      <Route exact path='/' element={<Home />} />
+     <Route exact path='/login' element={<Login />} />
 
      {categoria?.map((item,index)=>{
        var nombre=item.nombre.replace(' ','_')

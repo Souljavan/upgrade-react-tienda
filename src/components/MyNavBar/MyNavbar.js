@@ -1,5 +1,6 @@
 import React from 'react'
-import { Navbar,Container,Nav } from 'react-bootstrap';
+import { Navbar,Container,Nav, Button} from 'react-bootstrap';
+import { Person } from 'react-bootstrap-icons';
 import "./MyNavbar.scss"
 
 const MyNavbar = (props) => {
@@ -20,6 +21,8 @@ const MyNavbar = (props) => {
             )
           })}
       </Nav>
+      <a href="/login"><Person size={30}/></a>
+      
     </Navbar.Collapse>
   </Container>
 </Navbar>
