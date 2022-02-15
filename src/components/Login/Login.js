@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {useNavigate,Link}  from 'react-router-dom'
 import { Form,Alert,Row,Col,Button } from 'react-bootstrap';
 
 
@@ -13,6 +14,8 @@ const Login = () => {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [mensajes, setMensajes] = useState(null);
   const [tipomensajes, setTipoMensajes] = useState(null);
+  const navigate = useNavigate();
+
 
   const submitForm = async (ev)  => {
     ev.preventDefault();
@@ -36,9 +39,14 @@ const Login = () => {
           localStorage.setItem('token', response.token);
           var hoy = new Date();
           localStorage.setItem('tokendate', hoy);
+          localStorage.setItem('tokenid', response._id);
           setMensajes("Logueado Correctamente.")
           setTipoMensajes("success")
           console.log(response)
+          
+          navigate("/profile");
+          
+
 
         }
         else{
@@ -82,6 +90,7 @@ const Login = () => {
   <Button variant="primary" type="submit">
     Submit
   </Button>
+  <Link to={"/newuser/"}> <Button variant="success">Registro</Button></Link>
 </Form>
 </>
   )

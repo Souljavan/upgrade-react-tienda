@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from 'react'
+import { Link } from "react-router-dom";
 import { Row,Col,Card, Button } from 'react-bootstrap';
 
 const Categorias = (props) => {
+  console.log("estoy en categorias")
 
   const BASEURL = "http://localhost:3001/productos/categoria/";
   const [productos, setproductos] = useState(null);
@@ -40,7 +42,7 @@ const Categorias = (props) => {
               <Card.Text>
                 {item.precio}
               </Card.Text>
-            <Button variant="primary">Ver Producto</Button>
+              <Link to={"/detalle_producto/"+item._id}><Button variant="primary">Ver Producto</Button></Link>
           </Card.Body>
         </Card>
     </Col>

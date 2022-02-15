@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react'
+import { Link } from "react-router-dom";
 import { Row,Col,Card, Button } from 'react-bootstrap';
 import "./Carrousel.scss"
 
@@ -39,7 +40,7 @@ const [isLoaded, setIsLoaded] = useState(false);
               <Card.Text>
                 {item.precio}
               </Card.Text>
-            <Button variant="primary">Ver Producto</Button>
+              <Link to={"/detalle_producto/"+item._id}> <Button variant="primary">Ver Producto</Button></Link>
           </Card.Body>
         </Card>
     </Col>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Navbar,Container,Nav, Button} from 'react-bootstrap';
+import { Navbar,Container,Nav} from 'react-bootstrap';
 import { Person,PersonCheck } from 'react-bootstrap-icons';
 import "./MyNavbar.scss"
 
@@ -8,16 +8,14 @@ const MyNavbar = (props) => {
 //Compruebo si esta logueado o no.
 var tokendate=localStorage.getItem('tokendate');
 var tokenconv=new Date(tokendate)
+var year = tokenconv.getYear(); // returns 100
 var today = new Date();
 today.setHours(today.getHours() + 4);
-const [Login, SetLogin] = useState(false);
 
-debugger
-if ((tokendate!=null)&&(tokenconv<=today)){
-  console.log(Login)
-  console.log("aqui estoy")
-  SetLogin(true)
-}
+console.log(tokenconv)
+console.log(today)
+console.log(year)
+
 
 
 
@@ -36,8 +34,7 @@ if ((tokendate!=null)&&(tokenconv<=today)){
             )
           })}
       </Nav>
-      {Login? <a href="/login"><PersonCheck size={30}/></a> : <a href="/login"><Person size={30}/></a>}
-      {/* <a href="/login"><Person size={30}/></a> */}
+      {tokenconv<=today && tokenconv!=null && year>=100 ? <a href="/profile"><PersonCheck size={30}/></a> : <a href="/login"><Person size={30}/></a>}
       
     </Navbar.Collapse>
   </Container>
