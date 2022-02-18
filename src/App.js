@@ -1,5 +1,5 @@
 import './App.scss';
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import MyNavbar from './components/MyNavBar/MyNavbar';
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -9,6 +9,9 @@ import DetalleProducto from './components/DetalleProducto/DetalleProducto';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import NewUser from './components/NewUser/NewUser';
+// Context
+import { CartProvider } from './context/CartContext';
+
 
 function App() {
 
@@ -36,7 +39,9 @@ useEffect(() => {
 
   return (
   <Container fluid="md">
+  <CartProvider>
     <MyNavbar categorias={categoria}/>
+    
      <Routes>
      <Route exact path='/' element={<Home />} />
      <Route exact path='/login' element={<Login />} />
@@ -55,6 +60,7 @@ useEffect(() => {
      <Route exact path='/categorias' element={<Categorias />} />
      
      </Routes>
+     </CartProvider>
      </Container>
     
   );

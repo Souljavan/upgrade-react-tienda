@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import { Navbar,Container,Nav} from 'react-bootstrap';
 import { Person,PersonCheck } from 'react-bootstrap-icons';
+import { CartContext } from '../../context/CartContext';
 import "./MyNavbar.scss"
 
 const MyNavbar = (props) => {
@@ -12,9 +13,12 @@ var year = tokenconv.getYear(); // returns 100
 var today = new Date();
 today.setHours(today.getHours() + 4);
 
-console.log(tokenconv)
-console.log(today)
-console.log(year)
+// console.log(tokenconv)
+// console.log(today)
+// console.log(year)
+
+const { items, setItems } = useContext(CartContext);
+console.log(items)
 
 
 

@@ -1,13 +1,15 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Link } from "react-router-dom";
 import { Row,Col,Card, Button } from 'react-bootstrap';
+import { CartContext } from '../../context/CartContext';
 
 const Categorias = (props) => {
-  console.log("estoy en categorias")
+  //console.log("estoy en categorias")
 
   const BASEURL = "http://localhost:3001/productos/categoria/";
   const [productos, setproductos] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { items, setItems } = useContext(CartContext);
   
     useEffect(() => {
       fetch(BASEURL + props.tipo)
@@ -24,7 +26,6 @@ const Categorias = (props) => {
         )
     },[isLoaded]);
 
-  console.log(props)
 
   return (
       <>
@@ -43,6 +44,7 @@ const Categorias = (props) => {
                 {item.precio}
               </Card.Text>
               <Link to={"/detalle_producto/"+item._id}><Button variant="primary">Ver Producto</Button></Link>
+              <Button variant="success" onClick={() => setItems([...items, item.nombre])}>Añadir al carrito</Button>
           </Card.Body>
         </Card>
     </Col>

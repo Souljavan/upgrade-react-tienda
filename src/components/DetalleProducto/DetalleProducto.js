@@ -1,18 +1,21 @@
-import React,{useState,useEffect,Image} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { useParams }from 'react-router-dom'
-import { Row,Col, ListGroup,Button} from 'react-bootstrap';
+import { Row,Col} from 'react-bootstrap';
+import { CartContext } from '../../context/CartContext';
 
 import "./DetalleProducto.scss"
 
 const DetalleProducto = () => {
 
   let {id} = useParams();
-  console.log(id);
+  //console.log(id);
 
 //cargo mis categorias activas. 
 const BASEURL = "http://localhost:3001/productos/"+id;
-console.log(BASEURL)
+//console.log(BASEURL)
 const [producto, setProducto] = useState(null);
+const { items, setItems } = useContext(CartContext);
+
 
 
 
@@ -22,7 +25,7 @@ useEffect(() => {
     .then(
       (response) => {
         setProducto(response);
-        console.log(response.data)
+        //console.log(response.data)
       },
       (error) => {
         console.log(error)
@@ -41,7 +44,7 @@ useEffect(() => {
     </Row>
     <Row>
       <Col>
-        <img src={"/"+producto?.imagen} />
+        <img src={"/"+producto?.imagen} alt="imagen" />
       </Col>
     </Row>
 
@@ -55,6 +58,9 @@ useEffect(() => {
         {producto?.descripcion} €
       </Col>
     </Row> 
+    <Row><Col>
+    <button onClick={() => setItems([...items, producto?.nombre])}>Añadir al carrito</button>
+    </Col></Row>
     </Row>
     
   )
