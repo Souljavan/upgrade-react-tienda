@@ -1,7 +1,8 @@
-import React, {useState,useContext} from 'react'
+import React, {useContext} from 'react'
 import { Navbar,Container,Nav} from 'react-bootstrap';
-import { Person,PersonCheck } from 'react-bootstrap-icons';
+import { Person,PersonCheck, Basket } from 'react-bootstrap-icons';
 import { CartContext } from '../../context/CartContext';
+import { Link } from "react-router-dom";
 import "./MyNavbar.scss"
 
 const MyNavbar = (props) => {
@@ -18,7 +19,7 @@ today.setHours(today.getHours() + 4);
 // console.log(year)
 
 const { items, setItems } = useContext(CartContext);
-console.log(items)
+
 
 
 
@@ -30,15 +31,16 @@ console.log(items)
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="me-auto">
-        <Nav.Link href="/">Home</Nav.Link>
+      <Link to="/" className="nav-link">Home</Link>
         {props.categorias?.map((item,index)=>{
           var nombre=item.nombre.replace(' ','_')
        return(
-              <Nav.Link href={'/'+nombre} key={index}>{item.nombre}</Nav.Link>
+            <Link to={'/'+nombre} className="nav-link" key={index}>{item.nombre}</Link>
             )
           })}
       </Nav>
-      {tokenconv<=today && tokenconv!=null && year>=100 ? <a href="/profile"><PersonCheck size={30}/></a> : <a href="/login"><Person size={30}/></a>}
+      {tokenconv<=today && tokenconv!=null && year>=100 ? <Link to="/profile"><PersonCheck size={30}/></Link> : <Link to="/login"><Person size={30}/></Link>}
+      <Link to="/carrito"><Basket size={30}/></Link>
       
     </Navbar.Collapse>
   </Container>

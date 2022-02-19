@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
     items,
     setItems,
   };
-  localStorage.setItem('carrito', items);
+
 
   return <CartContext.Provider value={store}>{children}</CartContext.Provider>;
 }

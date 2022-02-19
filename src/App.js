@@ -11,6 +11,7 @@ import Profile from './components/Profile/Profile';
 import NewUser from './components/NewUser/NewUser';
 // Context
 import { CartProvider } from './context/CartContext';
+import Carrito from './components/Carrito/Carrito';
 
 
 function App() {
@@ -48,6 +49,7 @@ useEffect(() => {
      <Route exact path='/newuser' element={<NewUser />} />
      <Route exact path='/detalle_producto/:id' element={<DetalleProducto />} />
      <Route exact path='/profile' element={<Profile />} />
+     <Route exact path='/carrito' element={<Carrito />} />
 
      {categoria?.map((item,index)=>{
        var nombre=item.nombre.replace(' ','_')
